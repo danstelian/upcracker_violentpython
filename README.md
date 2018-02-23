@@ -6,6 +6,7 @@
 
 ## Set up dev environment
 - create new isolated environment with python3 as the interpreter
+
 	virtualenv -p python3 venv
 
 ## Activate it
@@ -13,6 +14,7 @@
 
 ## Install third party libraries
 - none at the moment
+
 	pip install -r requirements.txt
 
 ## Run script
