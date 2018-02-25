@@ -20,19 +20,20 @@ def test_passwd(user_list, path_dict):
     prints a message indicating the matching word for each encrypted password hash
     or prints "not found" after exhausting the words in the dictionary
     """
-    print('Opening the dictionary file', end='\n')
+    print('Opening the dictionary file')
 
-    for usr, pas in user_list:  # every user/password in the list
-        salt = pas[:2]  # strips out the salt from the first two characters of the encrypted password hash
-        sleep(1)
-        print(f'{usr} : {pas}', end=' | ')
+    with open(path_dict) as file_dict:
+        for usr, pas in user_list:  # for every passward in the list
 
-        with open(path_dict) as file_dict:
+            file_dict.seek(0)  # for each loop, start reading from the top of the file
+            salt = pas[:2]  # strips out the salt from the first two characters of the encrypted password hash
+            sleep(1)
+            print(f'{usr} : {pas}', end=' | ')
+
             found = False
             for word in file_dict:  # iterates through each word in the dictionary
                 word = word.rstrip()
-                word_crypt = crypt.crypt(word, salt)
-                # creates an encrypted password hash from the word and the salt
+                word_crypt = crypt.crypt(word, salt)  # creates an encrypted password hash from the word and the salt
                 if word_crypt == pas:  # if the resulted hash matches the password hash
                     print(f'found: {word}')
                     found = True
